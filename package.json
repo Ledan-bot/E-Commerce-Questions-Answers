@@ -1,7 +1,7 @@
 {
   "name": "e-commerce-questions-answers-service",
   "version": "1.0.0",
-  "description": "\"Server and database for a Questions and Answers service in an E-commerce application with a front-end previously built.\"",
+  "description": "Server and database for a Questions and Answers service in an E-commerce application with a previously built front-end",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
