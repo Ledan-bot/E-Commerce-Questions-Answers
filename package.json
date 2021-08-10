@@ -1,0 +1,27 @@
+{
+  "name": "e-commerce-questions-answers-service",
+  "version": "1.0.0",
+  "description": "\"Server and database for a Questions and Answers service in an E-commerce application with a front-end previously built.\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SDC-Schist/E-Commerce-Questions-Answers.git"
+  },
+  "author": "Nick Ledan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SDC-Schist/E-Commerce-Questions-Answers/issues"
+  },
+  "homepage": "https://github.com/SDC-Schist/E-Commerce-Questions-Answers#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "mongoose": "^5.13.6",
+    "nodemon": "^2.0.12"
+  }
+}
