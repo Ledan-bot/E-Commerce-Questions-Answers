@@ -1,0 +1,25 @@
+{
+  config: {
+    target: "http://127.0.0.1:3636",
+    http: {timeout: 50},
+    phases: [
+      {
+        duration: 30,
+        arrivalRate: 100
+      }
+    ]
+  },
+  scenarios: [
+    {
+      flow: [
+        {
+          get: {
+            url: "/qa/questions/test"
+          }
+        }
+      ]
+    }
+  ]
+}
+
+

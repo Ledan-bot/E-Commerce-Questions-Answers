@@ -8,6 +8,8 @@ db.once('open', () => {
 
 const { Schema } = mongoose;
 
+
+//QUESTIONS SCHEMA & FUNCTIONS
 let questionSchema = new Schema({
   id: Number,
   product_id: Number,
@@ -25,6 +27,41 @@ let fetchQuestions = async (product_id) => {
   return Question.find({'product_id': product_id})
 }
 
+let addNewQuestion = async (question) => {
+  let lastUsedid = await Question.find().sort({"id": -1}).limit(1)
+  let nextId = lastUsedid[0].id + 1
+  console.log(nextId)
+  let newQuestion = new Question({
+    id: nextId,
+    product_id: question.product_id,
+    body: question.body,
+    date_written: new Date(),
+    asker_name: question.name,
+    asker_email: question.email,
+    reported: false,
+    helpful: 0
+  })
+
+  newQuestion.save((err, saved) => {
+    if (err => {
+      console.log(err)
+    })
+    return saved
+  })
+}
+
+let markQuestionHelpful = async (question_id) => {
+  let succces = await Question.updateOne({id: question_id}, { $inc: {helpful: 1}})
+  return succces
+}
+
+let reportQuestion = async (question_id) => {
+  let reported = await Question.updateOne({id: question_id}, {reported: true})
+  return reported
+}
+
+
+//ANSWER SCHEMA & FUNCTIONS
 let answerSchema = new Schema({
   id: Number,
   question_id: Number,
@@ -44,6 +81,42 @@ let fetchAnswers = async (question_id, limit = 5) => {
   return answers
 }
 
+const addNewAnswer = async (answer) => {
+  let lastUsedId = await Answer.find().sort({"id": -1}).limit(1)
+  let nextId = lastUsedId[0].id + 1
+
+  let newAnswer = new Answer({
+    id: nextId,
+    question_id: answer.question_id,
+    body: answer.body,
+    date_written: new Date(),
+    answerer_name: answer.name,
+    answerer_email: answer.email,
+    reported: false,
+    helpful: 0
+  })
+
+  newAnswer.save((err, saved) => {
+    if (err => {
+      console.log(err)
+    })
+    return saved
+  })
+}
+
+const markAnswerHelpful = async (answer_id) => {
+  let succces = await Answer.updateOne({id: answer_id}, {$inc: {helpful: 1}})
+  return succces
+}
+
+const reportAnswer = async (answer_id) => {
+  let reported = await Answer.updateOne({id: answer_id}, {reported: true})
+  return reported
+}
+
+
+
+//PHOTO SCHEMA & FUNCTIONS
 let answerPhotoSchema = new Schema({
   id: Number,
   answer_id: Number,
@@ -58,7 +131,13 @@ let fectchAnswerPhotos = async (answer_id) => {
 
 module.exports = {
   fetchQuestions: fetchQuestions,
+  addNewQuestion: addNewQuestion,
+  markQuestionHelpful: markQuestionHelpful,
+  reportQuestion: reportQuestion,
   fetchAnswers: fetchAnswers,
+  addNewAnswer: addNewAnswer,
+  markAnswerHelpful: markAnswerHelpful,
+  reportAnswer: reportAnswer,
   fectchAnswerPhotos: fectchAnswerPhotos
 }
 
