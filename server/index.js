@@ -4,8 +4,7 @@ let app = express()
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  console.log('SUP humans')
-  res.send('sup Martians?')
+  //test
 })
 
 app.get('/qa/questions', (req, res) => {
